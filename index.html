@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fake News e Manipulação da Informação na Era da IA — Joinville</title>
+<style>
+  /* ==========================================================
+     TOKENS
+     ========================================================== */
+  :root{
+    --navy: #19396A;
+    --navy-deep: #0E2647;
+    --navy-soft: #2E5590;
+    --blue-light: #6FA3D8;
+    --blue-pale: #EAF1FA;
+    --gray-900: #1C2430;
+    --gray-600: #5B6472;
+    --gray-300: #D9DFE7;
+    --gray-100: #F4F6F9;
+    --white: #FFFFFF;
+    --true-green: #1F8A5A;
+    --false-red: #B3402A;
+    --radius-lg: 22px;
+    --radius-md: 14px;
+    --radius-sm: 8px;
+    --shadow-soft: 0 10px 30px rgba(25,57,106,0.08);
+    --shadow-hover: 0 16px 40px rgba(25,57,106,0.14);
+    --maxw: 1100px;
+    --font-display: Georgia, 'Times New Roman', serif;
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--font-body);
+    color:var(--gray-900);
+    background:var(--white);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{max-width:100%;display:block;}
+  h1,h2,h3{font-family:var(--font-display); margin:0 0 .5em 0; line-height:1.15; font-weight:700;}
+  p{margin:0 0 1em 0; color:var(--gray-600);}
+  a{color:inherit;}
+  button{font-family:inherit;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  section{padding:100px 0;}
+  @media (max-width:640px){ section{padding:64px 0;} }
+
+  .eyebrow{
+    font-size:.8rem;
+    color:var(--navy-soft);
+    letter-spacing:.03em;
+    margin-bottom:14px;
+    font-weight:600;
+  }
+
+  .lede{
+    max-width:640px;
+    font-size:1.08rem;
+  }
+
+  /* Reveal on scroll — one quiet, consistent behavior */
+  .reveal{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ==========================================================
+     HERO
+     ========================================================== */
+  .hero{
+    position:relative;
+    min-height:92vh;
+    display:flex;
+    align-items:center;
+    background:
+      radial-gradient(circle at 82% 18%, rgba(111,163,216,0.16), transparent 55%),
+      linear-gradient(180deg, #FBFCFE 0%, #FFFFFF 70%);
+    overflow:hidden;
+    padding-top:40px;
+  }
+  .hero-net{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    opacity:.9;
+  }
+  .hero-content{
+    position:relative;
+    z-index:1;
+    max-width:760px;
+  }
+  .hero-tag{
+    display:inline-block;
+    font-size:.78rem;
+    font-weight:600;
+    letter-spacing:.02em;
+    color:var(--navy);
+    background:var(--blue-pale);
+    padding:7px 14px;
+    border-radius:100px;
+    margin-bottom:26px;
+  }
+  .hero h1{
+    font-size:clamp(2.2rem, 5.4vw, 3.6rem);
+    color:var(--navy-deep);
+    margin-bottom:.3em;
+  }
+  .hero .sub{
+    font-size:clamp(1.1rem, 2.4vw, 1.5rem);
+    color:var(--navy-soft);
+    font-family:var(--font-display);
+    font-style:italic;
+    margin-bottom:1.1em;
+    font-weight:400;
+  }
+  .hero .meta{
+    font-size:.92rem;
+    color:var(--gray-600);
+    margin-bottom:2.2em;
+  }
+  .hero blockquote{
+    border-left:3px solid var(--navy);
+    padding-left:20px;
+    margin:0 0 2.4em 0;
+    font-family:var(--font-display);
+    font-size:1.3rem;
+    color:var(--gray-900);
+    font-style:italic;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--navy);
+    color:var(--white);
+    border:none;
+    padding:15px 30px;
+    border-radius:100px;
+    font-size:.98rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+    box-shadow:var(--shadow-soft);
+  }
+  .btn:hover{ transform:translateY(-2px); box-shadow:var(--shadow-hover); background:var(--navy-deep); }
+  .btn:focus-visible{ outline:3px solid var(--blue-light); outline-offset:3px; }
+  .btn-ghost{
+    background:transparent;
+    color:var(--navy);
+    border:1.5px solid var(--gray-300);
+    box-shadow:none;
+  }
+  .btn-ghost:hover{ background:var(--blue-pale); border-color:var(--blue-light); }
+
+  /* ==========================================================
+     SECTION HEADERS
+     ========================================================== */
+  .sec-head{ max-width:640px; margin-bottom:48px; }
+  .sec-head h2{ font-size:clamp(1.7rem, 3.4vw, 2.3rem); color:var(--navy-deep); }
+  .bg-soft{ background:var(--gray-100); }
+  .bg-navy{ background:var(--navy-deep); color:var(--white); }
+  .bg-navy .sec-head h2, .bg-navy h3{ color:var(--white); }
+  .bg-navy p{ color:rgba(255,255,255,0.72); }
+
+  /* ==========================================================
+     FLOW STEPS (section 2)
+     ========================================================== */
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin:36px 0;
+  }
+  .flow-step{
+    flex:1 1 200px;
+    background:var(--white);
+    border:1px solid var(--gray-300);
+    border-radius:var(--radius-md);
+    padding:20px 18px;
+    font-weight:600;
+    color:var(--navy);
+    position:relative;
+  }
+  .flow-step .n{
+    display:block;
+    font-size:.72rem;
+    color:var(--gray-600);
+    font-weight:500;
+    margin-bottom:6px;
+  }
+  .note-box{
+    background:var(--blue-pale);
+    border-radius:var(--radius-md);
+    padding:22px 26px;
+    color:var(--navy-deep);
+    font-weight:500;
+    margin-top:8px;
+  }
+  .note-box p{ color:var(--navy-deep); margin:0; }
+
+  /* ==========================================================
+     CARD GRID (IA usages, impacts)
+     ========================================================== */
+  .grid-4{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+  }
+  @media (max-width:900px){ .grid-4{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:520px){ .grid-4{ grid-template-columns:1fr; } }
+
+  .card{
+    background:var(--white);
+    border:1px solid var(--gray-300);
+    border-radius:var(--radius-md);
+    padding:26px 22px;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .card:hover{ transform:translateY(-4px); box-shadow:var(--shadow-soft); border-color:var(--blue-light); }
+  .card .ic{ font-size:1.7rem; margin-bottom:14px; display:block; }
+  .card h3{ font-size:1.05rem; color:var(--navy-deep); margin-bottom:.4em; }
+  .card p{ font-size:.94rem; margin:0; }
+
+  .callout{
+    margin-top:38px;
+    font-family:var(--font-display);
+    font-style:italic;
+    font-size:1.15rem;
+    color:var(--navy-deep);
+    max-width:700px;
+  }
+
+  /* ==========================================================
+     CHECKLIST (section 4)
+     ========================================================== */
+  .checklist{ display:flex; flex-direction:column; gap:12px; }
+  .check-item{
+    background:var(--white);
+    border:1px solid var(--gray-300);
+    border-radius:var(--radius-md);
+    overflow:hidden;
+  }
+  .check-item button{
+    width:100%;
+    background:none;
+    border:none;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:20px 22px;
+    text-align:left;
+    cursor:pointer;
+    color:var(--gray-900);
+  }
+  .check-item .num{
+    font-family:var(--font-display);
+    font-size:1.3rem;
+    color:var(--blue-light);
+    font-weight:700;
+    min-width:34px;
+  }
+  .check-item .title{ font-weight:600; font-size:1.02rem; flex:1; color:var(--navy-deep); }
+  .check-item .chev{
+    transition:transform .3s ease;
+    color:var(--gray-600);
+    font-size:1.1rem;
+  }
+  .check-item.open .chev{ transform:rotate(45deg); }
+  .check-item .panel{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease;
+  }
+  .check-item .panel-inner{
+    padding:0 22px 22px 74px;
+    font-size:.96rem;
+    color:var(--gray-600);
+  }
+  .important-box{
+    margin-top:30px;
+    border-left:3px solid var(--navy);
+    padding:18px 24px;
+    background:var(--gray-100);
+    border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  }
+  .important-box p{ margin:0; color:var(--gray-900); }
+
+  /* ==========================================================
+     QUIZ (section 5)
+     ========================================================== */
+  .quiz-box{
+    background:var(--white);
+    border:1px solid var(--gray-300);
+    border-radius:var(--radius-lg);
+    padding:40px;
+    box-shadow:var(--shadow-soft);
+    max-width:720px;
+    margin:0 auto;
+  }
+  @media (max-width:640px){ .quiz-box{ padding:26px 20px; } }
+  .quiz-progress{
+    display:flex; gap:6px; margin-bottom:28px;
+  }
+  .quiz-progress span{
+    height:4px; flex:1; background:var(--gray-300); border-radius:2px; overflow:hidden; position:relative;
+  }
+  .quiz-progress span.done::after, .quiz-progress span.active::after{
+    content:''; position:absolute; inset:0; background:var(--navy); border-radius:2px;
+  }
+  .quiz-count{ font-size:.82rem; color:var(--gray-600); margin-bottom:10px; }
+  .quiz-q{ font-size:1.2rem; color:var(--gray-900); margin-bottom:28px; font-weight:500; }
+  .quiz-answers{ display:flex; gap:14px; margin-bottom:8px; }
+  @media (max-width:480px){ .quiz-answers{ flex-direction:column; } }
+  .ans-btn{
+    flex:1;
+    padding:16px;
+    border-radius:var(--radius-md);
+    border:1.5px solid var(--gray-300);
+    background:var(--white);
+    font-weight:600;
+    font-size:.98rem;
+    cursor:pointer;
+    color:var(--navy-deep);
+    transition:border-color .2s ease, background .2s ease, transform .15s ease;
+  }
+  .ans-btn:hover{ border-color:var(--navy); background:var(--blue-pale); }
+  .ans-btn:disabled{ cursor:default; }
+  .ans-btn.correct{ background:#E9F6EF; border-color:var(--true-green); color:var(--true-green); }
+  .ans-btn.incorrect{ background:#FBECE8; border-color:var(--false-red); color:var(--false-red); }
+
+  .quiz-feedback{
+    margin-top:22px;
+    padding:18px 20px;
+    border-radius:var(--radius-md);
+    background:var(--gray-100);
+    display:none;
+  }
+  .quiz-feedback.show{ display:block; }
+  .quiz-feedback .verdict{ font-weight:700; margin-bottom:6px; }
+  .quiz-feedback.correct-fb .verdict{ color:var(--true-green); }
+  .quiz-feedback.incorrect-fb .verdict{ color:var(--false-red); }
+  .quiz-feedback p{ margin:0; color:var(--gray-600); font-size:.94rem; }
+  .quiz-next{ margin-top:22px; text-align:right; }
+
+  .quiz-result{ text-align:center; display:none; }
+  .quiz-result.show{ display:block; }
+  .quiz-result .score{
+    font-family:var(--font-display);
+    font-size:3rem;
+    color:var(--navy);
+    margin-bottom:.2em;
+  }
+  .quiz-result .msg{ font-size:1.08rem; color:var(--gray-900); max-width:480px; margin:0 auto 28px; }
+
+  /* ==========================================================
+     SPLIT (section 6)
+     ========================================================== */
+  .split{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    gap:36px;
+    align-items:start;
+  }
+  @media (max-width:760px){ .split{ grid-template-columns:1fr; } .split .divider{ display:none; } }
+  .split .divider{
+    width:1px; background:var(--gray-300); align-self:stretch; margin:0 auto;
+  }
+  .split-col h3{ font-size:1.15rem; color:var(--navy-deep); margin-bottom:.7em; }
+  .split-col ul{ margin:0; padding-left:20px; color:var(--gray-600); }
+  .split-col li{ margin-bottom:8px; }
+  .split-center{
+    grid-column:1/-1;
+    text-align:center;
+    margin-top:8px;
+    font-family:var(--font-display);
+    font-style:italic;
+    font-size:1.15rem;
+    color:var(--navy-deep);
+  }
+
+  /* ==========================================================
+     EXPERIMENT (section 7)
+     ========================================================== */
+  .exp-flow{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:44px 0 30px;
+  }
+  .exp-node{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.18);
+    border-radius:var(--radius-md);
+    padding:16px 20px;
+    font-size:.9rem;
+    font-weight:600;
+    color:var(--white);
+    opacity:.35;
+    transition:opacity .4s ease, background .4s ease, border-color .4s ease;
+    min-width:120px;
+    text-align:center;
+  }
+  .exp-node.active{
+    opacity:1;
+    background:rgba(111,163,216,0.18);
+    border-color:var(--blue-light);
+  }
+  .exp-arrow{ color:rgba(255,255,255,0.4); font-size:1.2rem; }
+  .exp-card{
+    max-width:420px;
+    margin:0 auto;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:var(--radius-md);
+    padding:22px 24px;
+  }
+  .exp-card h3{ font-size:1rem; margin-bottom:.4em; color:var(--white); }
+  .exp-card p{ font-size:.92rem; margin:0; color:rgba(255,255,255,0.7); }
+  .exp-line{
+    text-align:center;
+    margin-top:34px;
+    font-family:var(--font-display);
+    font-style:italic;
+    color:rgba(255,255,255,0.85);
+    font-size:1.1rem;
+  }
+
+  /* ==========================================================
+     CONCLUSION (section 9)
+     ========================================================== */
+  .conclusion{ text-align:center; }
+  .conclusion .sec-head{ margin:0 auto 20px; }
+  .conclusion .lede{ margin:0 auto 34px; }
+  .conclusion .big-line{
+    font-family:var(--font-display);
+    font-size:clamp(1.5rem, 3.6vw, 2.1rem);
+    color:var(--navy-deep);
+    margin:36px 0 16px;
+  }
+  .tags-row{
+    display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:20px;
+  }
+  .tag-pill{
+    border:1px solid var(--gray-300);
+    border-radius:100px;
+    padding:8px 18px;
+    font-size:.86rem;
+    color:var(--navy);
+    font-weight:600;
+  }
+
+  /* ==========================================================
+     FOOTER
+     ========================================================== */
+  footer{
+    background:var(--navy-deep);
+    color:rgba(255,255,255,0.7);
+    padding:44px 0;
+    text-align:center;
+    font-size:.9rem;
+  }
+  footer strong{ color:var(--white); display:block; margin-bottom:8px; font-size:.96rem; }
+
+  .scroll-hint{
+    position:absolute;
+    bottom:34px;
+    left:24px;
+    font-size:.78rem;
+    color:var(--gray-600);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  @media (max-width:640px){ .scroll-hint{ display:none; } }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     1. HERO
+     ============================================================ -->
+<header class="hero">
+  <svg class="hero-net" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g stroke="#19396A" stroke-opacity="0.10" stroke-width="1">
+      <line x1="700" y1="120" x2="950" y2="230"/>
+      <line x1="950" y1="230" x2="880" y2="470"/>
+      <line x1="880" y1="470" x2="1100" y2="560"/>
+      <line x1="700" y1="120" x2="880" y2="470"/>
+      <line x1="950" y1="230" x2="1150" y2="140"/>
+      <line x1="880" y1="470" x2="650" y2="600"/>
+      <line x1="1100" y1="560" x2="650" y2="600"/>
+      <line x1="1150" y1="140" x2="1200" y2="380"/>
+    </g>
+    <g fill="#19396A" fill-opacity="0.5">
+      <circle cx="700" cy="120" r="4"/>
+      <circle cx="950" cy="230" r="5"/>
+      <circle cx="880" cy="470" r="4"/>
+      <circle cx="1100" cy="560" r="6"/>
+      <circle cx="1150" cy="140" r="3"/>
+      <circle cx="650" cy="600" r="4"/>
+      <circle cx="1200" cy="380" r="3"/>
+    </g>
+  </svg>
+  <div class="wrap hero-content">
+    <span class="hero-tag">Projeto de Feira de Ciências · Joinville</span>
+    <h1>Fake news e manipulação<br>da informação</h1>
+    <p class="sub">Na era da inteligência artificial</p>
+    <blockquote>Se parece real, significa que é verdadeiro?</blockquote>
+    <button class="btn" id="btnComecar">Começar</button>
+  </div>
+  <div class="scroll-hint">↓ &nbsp;role para explorar</div>
+</header>
+
+<!-- ============================================================
+     2. O QUE É DESINFORMAÇÃO
+     ============================================================ -->
+<section id="desinformacao">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>O que é desinformação?</h2>
+      <p class="lede">Desinformação é a criação ou divulgação de informações falsas ou enganosas que podem levar pessoas a acreditar em algo que não corresponde aos fatos.</p>
+    </div>
+
+    <div class="flow reveal">
+      <div class="flow-step"><span class="n">Ponto de partida</span>Informação</div>
+      <div class="flow-step"><span class="n">O que muda</span>Manipulação</div>
+      <div class="flow-step"><span class="n">Como se espalha</span>Compartilhamento</div>
+      <div class="flow-step"><span class="n">O resultado</span>Alcance</div>
+    </div>
+
+    <div class="note-box reveal">
+      <p>Nem toda informação falsa é criada da mesma maneira. Ela pode envolver textos, imagens, vídeos, áudios ou conteúdos verdadeiros apresentados fora de contexto.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     3. ONDE ENTRA A IA
+     ============================================================ -->
+<section class="bg-soft" id="ia-usos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Como a IA pode ser usada?</h2>
+    </div>
+    <div class="grid-4 reveal">
+      <div class="card">
+        <span class="ic">📝</span>
+        <h3>Texto</h3>
+        <p>Produção de textos e notícias aparentemente convincentes.</p>
+      </div>
+      <div class="card">
+        <span class="ic">🖼️</span>
+        <h3>Imagem</h3>
+        <p>Criação ou alteração de imagens realistas.</p>
+      </div>
+      <div class="card">
+        <span class="ic">🎙️</span>
+        <h3>Áudio</h3>
+        <p>Imitação ou alteração de vozes.</p>
+      </div>
+      <div class="card">
+        <span class="ic">🎥</span>
+        <h3>Vídeo</h3>
+        <p>Criação de vídeos manipulados, incluindo deepfakes.</p>
+      </div>
+    </div>
+    <p class="callout reveal">A mesma tecnologia que pode ser usada para criar conteúdos enganosos também pode ajudar a detectá-los.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. CHECKLIST
+     ============================================================ -->
+<section id="identificar">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>🔎 Como identificar?</h2>
+      <p class="lede">Toque em cada item para ver a explicação.</p>
+    </div>
+
+    <div class="checklist reveal" id="checklist">
+      <div class="check-item">
+        <button aria-expanded="false">
+          <span class="num">01</span>
+          <span class="title">Verifique a fonte</span>
+          <span class="chev">+</span>
+        </button>
+        <div class="panel"><div class="panel-inner">Quem publicou? O site, perfil ou veículo é confiável?</div></div>
+      </div>
+      <div class="check-item">
+        <button aria-expanded="false">
+          <span class="num">02</span>
+          <span class="title">Olhe a data</span>
+          <span class="chev">+</span>
+        </button>
+        <div class="panel"><div class="panel-inner">Uma notícia antiga pode estar sendo compartilhada como se fosse atual.</div></div>
+      </div>
+      <div class="check-item">
+        <button aria-expanded="false">
+          <span class="num">03</span>
+          <span class="title">Procure outras fontes</span>
+          <span class="chev">+</span>
+        </button>
+        <div class="panel"><div class="panel-inner">Veja se outros veículos confiáveis também estão relatando o mesmo acontecimento.</div></div>
+      </div>
+      <div class="check-item">
+        <button aria-expanded="false">
+          <span class="num">04</span>
+          <span class="title">Analise a imagem</span>
+          <span class="chev">+</span>
+        </button>
+        <div class="panel"><div class="panel-inner">Uma imagem verdadeira pode estar sendo usada fora de contexto. Procure a origem e observe os detalhes.</div></div>
+      </div>
+      <div class="check-item">
+        <button aria-expanded="false">
+          <span class="num">05</span>
+          <span class="title">Desconfie do sensacionalismo</span>
+          <span class="chev">+</span>
+        </button>
+        <div class="panel"><div class="panel-inner">Títulos que tentam provocar medo, raiva ou urgência podem estimular o compartilhamento sem verificação.</div></div>
+      </div>
+    </div>
+
+    <div class="important-box reveal">
+      <p><strong>Importante:</strong> nenhum desses sinais, isoladamente, prova que um conteúdo é falso. A melhor estratégia é verificar a origem, o contexto e outras fontes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     5. TESTE
+     ============================================================ -->
+<section class="bg-soft" id="teste">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-left:auto;margin-right:auto;text-align:center;">
+      <h2>🕵️ Você consegue pegar a fake news?</h2>
+      <p class="lede" style="margin:0 auto;">Leia cada situação e escolha: verdadeiro ou falso.</p>
+    </div>
+
+    <div class="quiz-box reveal" id="quizBox">
+      <div class="quiz-progress" id="quizProgress"></div>
+
+      <div id="quizPlay">
+        <div class="quiz-count" id="quizCount">Pergunta 1 de 5</div>
+        <p class="quiz-q" id="quizQ"></p>
+        <div class="quiz-answers">
+          <button class="ans-btn" id="btnTrue" data-val="true">Verdadeiro</button>
+          <button class="ans-btn" id="btnFalse" data-val="false">Falso</button>
+        </div>
+        <div class="quiz-feedback" id="quizFeedback">
+          <div class="verdict" id="quizVerdict"></div>
+          <p id="quizExplain"></p>
+        </div>
+        <div class="quiz-next">
+          <button class="btn" id="btnNext" style="display:none;">Próxima pergunta</button>
+        </div>
+      </div>
+
+      <div class="quiz-result" id="quizResult">
+        <div class="score" id="quizScore">0/5</div>
+        <p class="msg" id="quizMsg"></p>
+        <button class="btn btn-ghost" id="btnRestart">Tentar novamente</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     6. IA CRIADORA E DETECTORA
+     ============================================================ -->
+<section id="dupla-face">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Uma tecnologia, dois usos</h2>
+    </div>
+    <div class="split reveal">
+      <div class="split-col">
+        <h3>🤖 IA pode criar</h3>
+        <ul>
+          <li>Textos</li>
+          <li>Imagens</li>
+          <li>Áudios</li>
+          <li>Vídeos</li>
+        </ul>
+      </div>
+      <div class="divider"></div>
+      <div class="split-col">
+        <h3>🔎 IA também pode ajudar a detectar</h3>
+        <ul>
+          <li>Padrões suspeitos</li>
+          <li>Alterações em imagens</li>
+          <li>Características de textos</li>
+          <li>Conteúdos manipulados</li>
+        </ul>
+      </div>
+      <p class="split-center">A tecnologia não é automaticamente boa ou ruim. Seu impacto depende de como é utilizada.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     7. EXPERIMENTO
+     ============================================================ -->
+<section class="bg-navy" id="experimento">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>💻 Experimento</h2>
+      <p class="lede">Durante a apresentação, demonstraremos como uma inteligência artificial pode produzir, em poucos instantes, um conteúdo fictício que aparenta ser uma notícia real.</p>
+    </div>
+
+    <div class="exp-card reveal">
+      <h3>Conteúdo fictício</h3>
+      <p>Uma simulação criada exclusivamente para demonstrar como conteúdos enganosos podem ser produzidos.</p>
+    </div>
+
+    <div class="exp-flow reveal" id="expFlow">
+      <div class="exp-node" data-i="0">Prompt</div>
+      <span class="exp-arrow">→</span>
+      <div class="exp-node" data-i="1">IA</div>
+      <span class="exp-arrow">→</span>
+      <div class="exp-node" data-i="2">Texto + Imagem</div>
+      <span class="exp-arrow">→</span>
+      <div class="exp-node" data-i="3">Conteúdo convincente</div>
+    </div>
+
+    <p class="exp-line reveal">Se é fácil criar, também precisamos aprender a verificar.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     8. IMPACTOS
+     ============================================================ -->
+<section id="impactos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Impactos da desinformação</h2>
+    </div>
+    <div class="grid-4 reveal">
+      <div class="card">
+        <span class="ic">🧠</span>
+        <h3>Opinião</h3>
+        <p>Pode influenciar a percepção das pessoas.</p>
+      </div>
+      <div class="card">
+        <span class="ic">⚠️</span>
+        <h3>Confusão</h3>
+        <p>Dificulta a distinção entre informação verdadeira e falsa.</p>
+      </div>
+      <div class="card">
+        <span class="ic">📱</span>
+        <h3>Compartilhamento</h3>
+        <p>As redes sociais podem acelerar a circulação de conteúdos.</p>
+      </div>
+      <div class="card">
+        <span class="ic">🌎</span>
+        <h3>Sociedade</h3>
+        <p>A desinformação pode gerar consequências reais.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     9. CONCLUSÃO
+     ============================================================ -->
+<section class="bg-soft conclusion" id="conclusao">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Antes de compartilhar, verifique.</h2>
+    </div>
+    <p class="lede reveal">A inteligência artificial tornou a criação de conteúdos convincentes mais acessível. Por isso, desenvolver o hábito de verificar fontes, datas, contexto e outras evidências tornou-se cada vez mais importante.</p>
+    <p class="big-line reveal">Aparência não é prova.</p>
+    <div class="tags-row reveal">
+      <span class="tag-pill">Fonte</span>
+      <span class="tag-pill">Data</span>
+      <span class="tag-pill">Contexto</span>
+      <span class="tag-pill">Outras fontes</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     10. RODAPÉ
+     ============================================================ -->
+<footer>
+  <div class="wrap">
+    <strong>Projeto de Feira de Ciências — Fake News e Manipulação da Informação na Era da Inteligência Artificial em Joinville</strong>
+    <span>Tecnologia + pensamento crítico = informação mais consciente</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- Smooth scroll from hero button ---------- */
+  var btnComecar = document.getElementById('btnComecar');
+  var alvo = document.getElementById('desinformacao');
+  if (btnComecar && alvo){
+    btnComecar.addEventListener('click', function(){
+      alvo.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  }
+
+  /* ---------- Reveal on scroll ---------- */
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.15});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  /* ---------- Checklist accordion ---------- */
+  var items = document.querySelectorAll('#checklist .check-item');
+  items.forEach(function(item){
+    var btn = item.querySelector('button');
+    var panel = item.querySelector('.panel');
+    btn.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      // close all
+      items.forEach(function(other){
+        other.classList.remove('open');
+        other.querySelector('button').setAttribute('aria-expanded','false');
+        other.querySelector('.panel').style.maxHeight = null;
+      });
+      if (!isOpen){
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded','true');
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      }
+    });
+  });
+
+  /* ---------- Quiz ---------- */
+  var perguntas = [
+    {
+      texto: "Uma fotografia real pode ser utilizada em uma publicação falsa quando é apresentada como se tivesse sido registrada em outro lugar ou em outra data.",
+      correta: true,
+      explicacao: "Uma imagem pode ser real, mas o contexto atribuído a ela pode ser falso."
+    },
+    {
+      texto: "Se uma imagem parece muito realista, podemos ter certeza de que ela foi registrada por uma câmera.",
+      correta: false,
+      explicacao: "Ferramentas de inteligência artificial conseguem produzir imagens extremamente realistas."
+    },
+    {
+      texto: "Verificar apenas o título de uma notícia é suficiente para saber se ela é verdadeira.",
+      correta: false,
+      explicacao: "É necessário verificar a fonte, a data, o contexto e, quando possível, outras fontes."
+    },
+    {
+      texto: "Uma notícia pode misturar informações verdadeiras com elementos enganosos.",
+      correta: true,
+      explicacao: "Conteúdos enganosos nem sempre são totalmente inventados."
+    },
+    {
+      texto: "A inteligência artificial pode ser utilizada tanto para criar conteúdos falsos quanto para auxiliar na identificação de conteúdos manipulados.",
+      correta: true,
+      explicacao: "A tecnologia pode ser utilizada para diferentes finalidades. O resultado depende de como ela é aplicada."
+    }
+  ];
+
+  var idx = 0;
+  var acertos = 0;
+  var respondida = false;
+
+  var elProgress = document.getElementById('quizProgress');
+  var elCount = document.getElementById('quizCount');
+  var elQ = document.getElementById('quizQ');
+  var btnTrue = document.getElementById('btnTrue');
+  var btnFalse = document.getElementById('btnFalse');
+  var elFeedback = document.getElementById('quizFeedback');
+  var elVerdict = document.getElementById('quizVerdict');
+  var elExplain = document.getElementById('quizExplain');
+  var btnNext = document.getElementById('btnNext');
+  var quizPlay = document.getElementById('quizPlay');
+  var quizResult = document.getElementById('quizResult');
+  var elScore = document.getElementById('quizScore');
+  var elMsg = document.getElementById('quizMsg');
+  var btnRestart = document.getElementById('btnRestart');
+
+  function buildProgress(){
+    elProgress.innerHTML = '';
+    for (var i=0;i<perguntas.length;i++){
+      var span = document.createElement('span');
+      elProgress.appendChild(span);
+    }
+  }
+
+  function updateProgress(){
+    var spans = elProgress.querySelectorAll('span');
+    spans.forEach(function(s, i){
+      s.classList.remove('done','active');
+      if (i < idx) s.classList.add('done');
+      else if (i === idx) s.classList.add('active');
+    });
+  }
+
+  function renderQuestion(){
+    respondida = false;
+    var p = perguntas[idx];
+    elCount.textContent = 'Pergunta ' + (idx+1) + ' de ' + perguntas.length;
+    elQ.textContent = p.texto;
+    btnTrue.disabled = false;
+    btnFalse.disabled = false;
+    btnTrue.classList.remove('correct','incorrect');
+    btnFalse.classList.remove('correct','incorrect');
+    elFeedback.classList.remove('show','correct-fb','incorrect-fb');
+    btnNext.style.display = 'none';
+    updateProgress();
+  }
+
+  function responder(valor){
+    if (respondida) return;
+    respondida = true;
+    var p = perguntas[idx];
+    var acertou = (valor === p.correta);
+    if (acertou) acertos++;
+
+    btnTrue.disabled = true;
+    btnFalse.disabled = true;
+
+    var certoBtn = p.correta ? btnTrue : btnFalse;
+    var erradoBtn = p.correta ? btnFalse : btnTrue;
+    certoBtn.classList.add('correct');
+    if (!acertou) erradoBtn.classList.add('incorrect');
+
+    elFeedback.classList.add('show');
+    elFeedback.classList.add(acertou ? 'correct-fb' : 'incorrect-fb');
+    elVerdict.textContent = acertou ? 'Correto.' : 'Não foi dessa vez.';
+    elExplain.textContent = p.explicacao;
+
+    btnNext.style.display = 'inline-flex';
+    btnNext.textContent = (idx === perguntas.length - 1) ? 'Ver resultado' : 'Próxima pergunta';
+  }
+
+  btnTrue.addEventListener('click', function(){ responder(true); });
+  btnFalse.addEventListener('click', function(){ responder(false); });
+
+  btnNext.addEventListener('click', function(){
+    idx++;
+    if (idx >= perguntas.length){
+      mostrarResultado();
+    } else {
+      renderQuestion();
+    }
+  });
+
+  function mostrarResultado(){
+    quizPlay.style.display = 'none';
+    quizResult.classList.add('show');
+    var spans = elProgress.querySelectorAll('span');
+    spans.forEach(function(s){ s.classList.add('done'); s.classList.remove('active'); });
+
+    elScore.textContent = acertos + '/' + perguntas.length;
+
+    var msg;
+    if (acertos === 5){
+      msg = 'Excelente! Seu radar de desinformação está afiado.';
+    } else if (acertos >= 3){
+      msg = 'Muito bem! Você já sabe identificar vários sinais importantes.';
+    } else {
+      msg = 'Esse é justamente o desafio: conteúdos enganosos podem parecer convincentes. Verifique antes de compartilhar.';
+    }
+    elMsg.textContent = msg;
+  }
+
+  btnRestart.addEventListener('click', function(){
+    idx = 0;
+    acertos = 0;
+    quizResult.classList.remove('show');
+    quizPlay.style.display = 'block';
+    renderQuestion();
+  });
+
+  buildProgress();
+  renderQuestion();
+
+  /* ---------- Experiment animation ---------- */
+  var expFlow = document.getElementById('expFlow');
+  if (expFlow){
+    var nodes = expFlow.querySelectorAll('.exp-node');
+    var expStep = 0;
+    var expTimer = null;
+
+    function tickExp(){
+      nodes.forEach(function(n, i){
+        n.classList.toggle('active', i <= expStep);
+      });
+      expStep++;
+      if (expStep > nodes.length){
+        expStep = 0;
+      }
+    }
+
+    function startExp(){
+      if (expTimer) return;
+      tickExp();
+      expTimer = setInterval(tickExp, 1100);
+    }
+    function stopExp(){
+      clearInterval(expTimer);
+      expTimer = null;
+    }
+
+    if ('IntersectionObserver' in window){
+      var ioExp = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) startExp();
+          else stopExp();
+        });
+      }, {threshold:0.4});
+      ioExp.observe(expFlow);
+    } else {
+      startExp();
+    }
+  }
+
+})();
+</script>
+</body>
+</html>
